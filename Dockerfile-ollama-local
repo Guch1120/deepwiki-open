@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y \
     curl
 # Detect architecture and download appropriate Ollama version
 # ARG TARGETARCH can be set at build time with --build-arg TARGETARCH=arm64 or TARGETARCH=amd64
-ARG TARGETARCH=arm64
+ARG TARGETARCH
 RUN OLLAMA_ARCH="" && \
     if [ "$TARGETARCH" = "arm64" ]; then \
         echo "Building for ARM64 architecture." && \
