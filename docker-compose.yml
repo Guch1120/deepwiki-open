@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile-ollama-local
     dns: 8.8.8.8
+    tty: true
     ports:
       - "${PORT:-8001}:${PORT:-8001}"  # API port
       - "3000:3000"  # Next.js port
@@ -20,6 +21,7 @@ services:
     env_file:
       - .env
     environment:
+      - PYTHONUNBUFFERED=1
       - PORT=${PORT:-8001}
       - NODE_ENV=production
       - SERVER_BASE_URL=http://localhost:${PORT:-8001}
