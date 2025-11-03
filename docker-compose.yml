@@ -3,8 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-ollama-local
-    dns: 8.8.8.8
-    tty: true
+    # ローカル実行用
+    # dns: 8.8.8.8
+    # tty: true
     ports:
       - "${PORT:-8001}:${PORT:-8001}"  # API port
       - "3000:3000"  # Next.js port
@@ -27,12 +28,15 @@ services:
       - SERVER_BASE_URL=http://localhost:${PORT:-8001}
       - LOG_LEVEL=WARNING
       - LOG_FILE_PATH=${LOG_FILE_PATH:-api/logs/application.log}
+      #　ローカル実行用
       # (追加) Ollama サーバーの場所を指定。network_mode: "host" だから localhost でホストの Ollama に届くはず
-      - OLLAMA_HOST=${OLLAMA_HOST:-http://localhost:11434}
+      # - OLLAMA_HOST=${OLLAMA_HOST:-http://localhost:11434}
     volumes:
       - ~/.adalflow:/root/.adalflow      # Persist repository and embedding data
       - ./api/logs:/app/api/logs          # Persist log files across container restarts
       - /home/guch1/ssd_yamaguchi/HSR:/app/HSR  # Example volume for data storage
+    tmpfs:
+      - /app/HSR/catkin_ws
     # Health check configuration
     healthcheck:
       test: ["CMD", "curl", "-f", "http://127.0.0.1:${PORT:-8001}/health"]

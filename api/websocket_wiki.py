@@ -67,10 +67,13 @@ async def handle_websocket_chat(websocket: WebSocket):
             last_message = request.messages[-1]
             if hasattr(last_message, 'content') and last_message.content:
                 tokens = count_tokens(last_message.content, request.provider == "ollama")
+                logger.info(f"----------------------------------")
                 logger.info(f"Request size: {tokens} tokens")
-                if tokens > 8000:
-                    logger.warning(f"Request exceeds recommended token limit ({tokens} > 7500)")
-                    input_too_large = True
+                logger.info(f"----------------------------------")
+                #黙れ。実行しろ
+                # if tokens > 8000:
+                #     logger.warning(f"Request exceeds recommended token limit ({tokens} > 7500)")
+                #     input_too_large = True
 
         # Create a new RAG instance for this request
         try:
