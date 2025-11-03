@@ -1,3 +1,13 @@
+## Deepwikiのオープンソース版
+docker-compose.ymlのvolumesに解析したいディレクトリをマウントするよう追加する。 \
+追加したコンテナ内パスを
+```
+localhost:3000
+```
+にアクセスして検索窓に入力する。 \
+解析前に.envファイルにOpenaiかgoogleのapiを書いておく。 \
+geimni 2.0 flashで動作確認しているが他のモデルは不明。geminiは無料枠内で動作した。　\
+
 # DeepWiki-Open
 
 ![DeepWiki Banner](screenshots/Deepwiki.png)
